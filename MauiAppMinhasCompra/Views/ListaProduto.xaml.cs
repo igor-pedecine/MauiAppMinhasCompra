@@ -10,8 +10,8 @@ public partial class ListaProduto : ContentPage
 	}
 
     private void ToolbarItem_Clicked(object sender, EventArgs e)
-    {
-		try
+    {/*Esse é o codigo por tras do botão adicinar, trocando para outra pagina */
+        try
 		{
 			Navigation.PushAsync(new Views.NovoProduto());
 

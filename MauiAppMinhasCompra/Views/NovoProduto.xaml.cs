@@ -13,7 +13,7 @@ public partial class NovoProduto : ContentPage
         try
         {
             Produto p = new Produto()
-            {
+            {/*Esse codigo pega as informações colocadas nos labels e coloca na tabela do banco de dados*/
                 Descricao = txt_descricao.Text,
                 Quantidade = Convert.ToDouble(txt_quantidade.Text),
                 Preco = Convert.ToDouble(txt_preco.Text)

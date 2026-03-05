@@ -1,8 +1,7 @@
 ﻿using SQLite;
-
 namespace MauiAppMinhasCompra.Models
 {
-    public class Produto
+    public class Produto /*Esse codigo define a estrutura da tabela Produto no banco de dados */
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
