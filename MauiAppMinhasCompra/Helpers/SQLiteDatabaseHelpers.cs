@@ -18,7 +18,7 @@ namespace MauiAppMinhasCompra.Helpers
         }
         public Task<List<Produto>> Update(Produto p) /*O método UPDATE tenta atualizar um registro existente na tabela Produto no banco de dados, com base no ID fornecido no objeto Produto (p)*/
         {
-            string sql = "UPDADTE Produto SET Descricao=?, Quantidade=?, Preco=?, WHERE Id=?";
+            string sql = "UPDADTE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
 
             return _conn.QueryAsync<Produto>(
                 sql, p.Descricao, p.Quantidade, p.Preco, p.Id
@@ -34,7 +34,7 @@ namespace MauiAppMinhasCompra.Helpers
         }
         public Task<List<Produto>> Search(string q)
         {
-            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'";
+            string sql = "SELECT *  FROM Produto WHERE descricao LIKE '%" + q + "%'";
 
             return _conn.QueryAsync<Produto>(sql);
         }

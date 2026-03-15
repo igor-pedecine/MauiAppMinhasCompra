@@ -23,9 +23,6 @@ namespace MauiAppMinhasCompra
                 }
                 return _db;
             }
-        
-        
-        
         }
         public App()
         {
