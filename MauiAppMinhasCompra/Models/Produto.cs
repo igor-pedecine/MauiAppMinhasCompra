@@ -3,11 +3,54 @@ namespace MauiAppMinhasCompra.Models
 {
     public class Produto /*Esse codigo define a estrutura da tabela Produto no banco de dados */
     {
+        String _descricao;/*validação da Descrição*/
+        Double _quantidade;/*validação da Quantidade*/
+        Double _preco;/*validação do Preço*/
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Descricao { get; set; }
-        public double Quantidade { get; set; }
-        public double Preco { get; set; }
+        
+        public string Descricao {
+            get => _descricao;
+            set
+            {
+                if(value == null)
+                {
+                    throw new Exception("Todo os campos precisam ser preenchidos!!!");
+                }
+
+                _descricao = value;
+            } 
+        }
+        
+        public double Quantidade
+        {
+            get => _quantidade;
+            set
+            {
+                if (value == 0 )
+                {
+                    throw new Exception("Todo os campos precisam ser preenchidos!!!");
+                }
+
+                _quantidade = value;
+            }
+        }
+
+        public double Preco
+        {
+            get => _preco;
+            set
+            {
+                if (value == 0)
+                {
+                    throw new Exception("Todo os campos precisam ser preenchidos!!!");
+                }
+
+                _preco = value;
+            }
+        }
+
         public double Total { get => Quantidade * Preco; }
     }
 }
