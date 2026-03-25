@@ -18,10 +18,10 @@ namespace MauiAppMinhasCompra.Helpers
         }
         public Task<List<Produto>> Update(Produto p) /*O método UPDATE tenta atualizar um registro existente na tabela Produto no banco de dados, com base no ID fornecido no objeto Produto (p)*/
         {
-            string sql = "UPDADTE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
+            string sql = "UPDADTE Produto SET Descricao=?,Categoria=?, Quantidade=?, Preco=? WHERE Id=?";
 
             return _conn.QueryAsync<Produto>(
-                sql, p.Descricao, p.Quantidade, p.Preco, p.Id
+                sql, p.Descricao, p.Categoria p.Quantidade, p.Preco, p.Id
             );
         }
         public Task<int> Delete(int id) /*O método DELETE remove um registro da tabela Produto com base no Id fornecido como argumento. Ele utilizaa funcionalidade assíncrona do SQLite para realizar a exclusão sem bloquear a thread principal.*/

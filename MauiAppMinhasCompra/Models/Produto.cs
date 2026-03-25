@@ -6,6 +6,8 @@ namespace MauiAppMinhasCompra.Models
         String _descricao;/*validação da Descrição*/
         Double _quantidade;/*validação da Quantidade*/
         Double _preco;/*validação do Preço*/
+        String _categoria;/*validação da Categoria*/
+
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -48,6 +50,20 @@ namespace MauiAppMinhasCompra.Models
                 }
 
                 _preco = value;
+            }
+        }
+
+        public string Categoria
+        {
+            get => _categoria;
+            set
+            {
+                if (value == null)
+                {
+                    throw new Exception("Todo os campos precisam ser preenchidos!!!");
+                }
+
+                _descricao = value;
             }
         }
 

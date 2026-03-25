@@ -28,6 +28,8 @@ namespace MauiAppMinhasCompra
         {
             InitializeComponent();  /*define a tela inicial do aplicativo*/
 
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");/*define a cultura do app*/
+
             //MainPage = new AppShell();
             MainPage = new NavigationPage(new Views.ListaProduto());
         }

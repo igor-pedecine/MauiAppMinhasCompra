@@ -9,21 +9,34 @@
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
-    <VerticalStackLayout
+    <StackLayout
         Padding="15">
         <SearchBar x:Name="txt_search"
+                   Margin="-15, 0, 0, 0"
                    Placeholder="Busque aqui:"
-                   TextChanged="txt_search_TextChanged"/> 
-        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
+                   TextChanged="txt_search_TextChanged"/>
+        <Frame Padding="0" Margin="10" VerticalOptions="FillAndExpand">
+            <ListView x:Name="lst_produtos"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="lst_produtos_Refreshing"
+                  ItemSelected="lst_produtos_ItemSelected">
             <ListView.Header>
-                <Grid ColumnDefinitions="*, *, *, *, *"
-                      Padding="10" >
-                    <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="Descrição" />
-                    <Label Grid.Column="2" Text="Preço" />
-                    <Label Grid.Column="3" Text="Quantidade" />
-                    <Label Grid.Column="4" Text="Total" />
+                <Grid ColumnDefinitions="30, 100, 80, 50, 90"
+                      BackgroundColor="{StaticResource Gray100}">
+                    <Label Grid.Column="0" Text="ID" Padding="5" FontAttributes="Bold"/>
+                    <Label Grid.Column="1" Text="Descrição" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="Preço" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="Quantidade" FontAttributes="Bold" />
+                    <Label Grid.Column="4" Text="Total" FontAttributes="Bold" />
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -34,18 +47,93 @@
                                       Clicked="MenuItem_Clicked"
                                       CommandParameter="{Binding .}"  />
                         </ViewCell.ContextActions>
-                        
-                        <Grid ColumnDefinitions="*, *, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}" />
+
+                            <Grid ColumnDefinitions="30, 100, 80, 50, 90">
+                            <Label Grid.Column="0" Text="{Binding Id}" Padding="5" />
                             <Label Grid.Column="1" Text="{Binding Descricao}" />
                             <Label Grid.Column="2" Text="{Binding Preco}" />
                             <Label Grid.Column="3" Text="{Binding Quantidade}" />
                             <Label Grid.Column="4" Text="{Binding Total}" />
                         </Grid>
-                        
+
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </VerticalStackLayout>
+        </Frame>
+        
+    </StackLayout>
+
+    <!-- <ContentPage.ToolbarItems
+        Padding="10" >
+        <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
+        <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <VerticalStackLayout Padding="10" Spacing="5">
+        
+
+        <SearchBar x:Name="txt_search"
+                   Placeholder="Busque aqui:"
+                   TextChanged="txt_search_TextChanged"
+                   Margin="0,0,0,10"/>
+
+     ****ListView com colunas ajustadas*************
+    <ListView x:Name="lst_produtos" 
+                  ItemSelected="lst_produtos_ItemSelected"
+                  SeparatorVisibility="Default"
+                  RowHeight="50">
+
+        <ListView.Header>
+           * Prioridade: Descrição (*) e as outras com tamanhos menores **
+            <Grid ColumnDefinitions="30, *, 60, 40, 60" Padding="5" BackgroundColor="#f0f0f0">
+                <Label Grid.Column="0" Text="ID" FontAttributes="Bold" FontSize="12"/>
+                <Label Grid.Column="1" Text="Desc." FontAttributes="Bold" FontSize="12"/>
+                <Label Grid.Column="2" Text="Preço" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center"/>
+                <Label Grid.Column="3" Text="Qtd" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center"/>
+                <Label Grid.Column="4" Text="Total" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="End"/>
+            </Grid>
+        </ListView.Header>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Remover" 
+                                      Clicked="MenuItem_Clicked"
+                                      CommandParameter="{Binding .}"  
+                                      IsDestructive="True" />
+                    </ViewCell.ContextActions>
+
+                    * Usando as mesmas larguras do Header para alinhar -**
+                    <Grid ColumnDefinitions="30, *, 60, 40, 60" Padding="5" VerticalOptions="Center">
+                        <Label Grid.Column="0" Text="{Binding Id}" FontSize="11" VerticalTextAlignment="Center"/>
+
+                         LineBreakMode="TailTruncation" coloca "..." se o nome for muito grande ****
+                        <Label Grid.Column="1" Text="{Binding Descricao}" 
+                                   LineBreakMode="TailTruncation" 
+                                   FontSize="12" 
+                                   VerticalTextAlignment="Center"/>
+
+                        <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{0:F2}'}" 
+                                   FontSize="11" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center"/>
+
+                        <Label Grid.Column="3" Text="{Binding Quantidade}" 
+                                   FontSize="11" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center"/>
+
+                        <Label Grid.Column="4" Text="{Binding Total, StringFormat='{0:F2}'}" 
+                                   FontSize="11" 
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="End" 
+                                   VerticalTextAlignment="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    </VerticalStackLayout> -->
 </ContentPage>

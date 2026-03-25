@@ -8,7 +8,7 @@ public partial class NovoProduto : ContentPage
 		InitializeComponent();
 	}
 
-    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         try
         {
@@ -18,12 +18,13 @@ public partial class NovoProduto : ContentPage
                 Quantidade = Convert.ToDouble(txt_quantidade.Text),
                 Preco = Convert.ToDouble(txt_preco.Text)
             };
-            App.Db.Insert(p);
-            DisplayAlert("Sucesso!!", "Registro cadastrado com sucesso!!", "OK");
+            await App.Db.Insert(p);
+            await DisplayAlert("Sucesso!!", "Registro cadastrado com sucesso!!", "OK");
+            await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
-            DisplayAlert("Ops!!", ex.Message, "OK");
+            await DisplayAlert("Ops!!", ex.Message, "OK");
         }
     }
 }
