@@ -5,18 +5,97 @@
              Title="{Binding Descricao}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="💾 Salvar" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <VerticalStackLayout Spacing="10" Padding="15">
-        <Label Text="Descrição do Produto:" />
-        <Entry x:Name="txt_descricao" Text="{Binding Descricao}" />
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-        <Label Text="Preço Unitario:" />
-        <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric" />
+            <!-- Título -->
+            <Label Text="Editar Produto"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#FFFFFF" />
 
-        <Label Text="Quantidade:" />
-        <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric" />
-    </VerticalStackLayout>
-    
+            <!-- Card -->
+            <Frame CornerRadius="15"
+                   Padding="20"
+                   HasShadow="True"
+                   BackgroundColor="#222">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Descrição -->
+                    <Label Text="Descrição"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF" />
+                    <Grid ColumnDefinitions="30,*">
+                        <Label Text="📝"
+                               FontSize="18"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="1"
+                               x:Name="txt_descricao"
+                               Text="{Binding Descricao}"
+                               FontSize="16" />
+                    </Grid>
+
+                    <!-- Categoria -->
+                    <Label Text="Categoria"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF" />
+                    <Grid ColumnDefinitions="30,*">
+                        <Label Text="📂"
+                               FontSize="18"
+                               VerticalOptions="Center" />
+                        <Picker Grid.Column="1"
+                                x:Name="picker_categoria"
+                                FontSize="16">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Alimentos</x:String>
+                                    <x:String>Limpeza</x:String>
+                                    <x:String>Higiene Pessoal</x:String>
+                                    <x:String>Outros</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+
+                    <!-- Preço -->
+                    <Label Text="Preço Unitário"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF" />
+                    <Grid ColumnDefinitions="30,*">
+                        <Label Text="💰"
+                               FontSize="18"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="1"
+                               x:Name="txt_preco"
+                               Text="{Binding Preco}"
+                               Keyboard="Numeric"
+                               FontSize="16" />
+                    </Grid>
+
+                    <!-- Quantidade -->
+                    <Label Text="Quantidade"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF" />
+                    <Grid ColumnDefinitions="30,*">
+                        <Label Text="📦"
+                               FontSize="18"
+                               VerticalOptions="Center" />
+                        <Entry Grid.Column="1"
+                               x:Name="txt_quantidade"
+                               Text="{Binding Quantidade}"
+                               Keyboard="Numeric"
+                               FontSize="16" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

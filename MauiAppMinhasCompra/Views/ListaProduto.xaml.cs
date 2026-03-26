@@ -1,7 +1,8 @@
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using MauiAppMinhasCompra.Models;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Xml.Linq;
 
 
 
@@ -70,12 +71,20 @@ public partial class ListaProduto : ContentPage
         
 	}
 
-	private void ToolbarItem_Clicked_1(object sender, EventArgs e)
-    {/*Botão de soma dos produtos*/
-		double soma = lista.Sum(i => i.Total);
-		string msg = $"O valor total da compra é: {soma:C}";
+    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+        string categoriaSelecionada = picker_filtro_categoria.SelectedItem?.ToString();
 
-		DisplayAlert("Total da Compra", msg, "OK");
+        IEnumerable<Produto> filtrados = lista;
+
+        if (categoriaSelecionada != "Todos")
+            filtrados = lista.Where(p => p.Categoria == categoriaSelecionada);
+
+        double soma = filtrados.Sum(i => i.Total);
+
+        string msg = $"O total da categoria {categoriaSelecionada} é {soma:C}";
+
+        DisplayAlert("Relatório por Categoria", msg, "OK");
     }
 
     private async void MenuItem_Clicked(object sender, EventArgs e)
@@ -135,5 +144,19 @@ public partial class ListaProduto : ContentPage
         {
             lst_produtos.IsRefreshing = false;
         }
+    }
+
+    private async void picker_filtro_categoria_SelectedIndexChanged(object sender, EventArgs e)
+    {/*seleção das categoriuas*/
+        string categoria = picker_filtro_categoria.SelectedItem.ToString();
+
+        var lista = await App.Db.GetAll();
+
+        if (categoria != "Todos")
+        {
+            lista = lista.Where(p => p.Categoria == categoria).ToList();
+        }
+
+        lst_produtos.ItemsSource = lista;
     }
 }

@@ -7,34 +7,39 @@ namespace MauiAppMinhasCompra.Helpers
     {
         readonly SQLiteAsyncConnection _conn;
 
-        public SQLiteDatabaseHelpers(string caminho) 
+        public SQLiteDatabaseHelpers(string caminho)
         {
             _conn = new SQLiteAsyncConnection(caminho);
-            _conn.CreateTableAsync<Produto>().Wait();/*cria uma tabela nova chamada Produto, no banco de dados*/
+            _conn.CreateTableAsync<Produto>().Wait();
         }
-        public Task<int> Insert(Produto p)/*este método INSERE um registro do tipo Produto no banco de dados SQLite*/
-        { 
+
+        public Task<int> Insert(Produto p)
+        {
             return _conn.InsertAsync(p);
         }
-        public Task<List<Produto>> Update(Produto p) /*O método UPDATE tenta atualizar um registro existente na tabela Produto no banco de dados, com base no ID fornecido no objeto Produto (p)*/
-        {
-            string sql = "UPDADTE Produto SET Descricao=?,Categoria=?, Quantidade=?, Preco=? WHERE Id=?";
 
-            return _conn.QueryAsync<Produto>(
-                sql, p.Descricao, p.Categoria p.Quantidade, p.Preco, p.Id
+        public Task<int> Update(Produto p)
+        {
+            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=?, Categoria=? WHERE Id=?";
+
+            return _conn.ExecuteAsync(
+                sql, p.Descricao, p.Quantidade, p.Preco, p.Categoria, p.Id
             );
         }
-        public Task<int> Delete(int id) /*O método DELETE remove um registro da tabela Produto com base no Id fornecido como argumento. Ele utilizaa funcionalidade assíncrona do SQLite para realizar a exclusão sem bloquear a thread principal.*/
+
+        public Task<int> Delete(int id)
         {
             return _conn.Table<Produto>().DeleteAsync(i => i.Id == id);
         }
-        public Task<List<Produto>> GetAll() /*O método GetAll (READ) é utilizado para consulta a tabela Produto no banco de dados e retorna todos os registros naforma de uma lista de objetos Produto*/
+
+        public Task<List<Produto>> GetAll()
         {
             return _conn.Table<Produto>().ToListAsync();
         }
+
         public Task<List<Produto>> Search(string q)
         {
-            string sql = "SELECT *  FROM Produto WHERE descricao LIKE '%" + q + "%'";
+            string sql = "SELECT * FROM Produto WHERE Descricao LIKE '%" + q + "%'";
 
             return _conn.QueryAsync<Produto>(sql);
         }

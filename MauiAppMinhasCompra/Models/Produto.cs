@@ -63,7 +63,7 @@ namespace MauiAppMinhasCompra.Models
                     throw new Exception("Todo os campos precisam ser preenchidos!!!");
                 }
 
-                _descricao = value;
+                _categoria = value;
             }
         }
 
